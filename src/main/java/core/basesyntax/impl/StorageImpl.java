@@ -3,7 +3,7 @@ package core.basesyntax.impl;
 import core.basesyntax.Storage;
 
 public class StorageImpl<K, V> implements Storage<K, V> {
-    private static int MAX_SIZE = 10;
+    private static final int MAX_SIZE = 10;
     private Pair[] storage;
     private int size;
 
@@ -12,13 +12,13 @@ public class StorageImpl<K, V> implements Storage<K, V> {
         this.storage = new Pair[MAX_SIZE];
     }
 
-    private <K> Pair findPair(K key) {
+    private Pair findPair(K key) {
         for (Pair item : storage) {
             if (item == null) {
                 continue;
             }
 
-            if ((key != null && item != null && key.equals(item.key)) || item.key == key) {
+            if ((key != null && item != null && key.equals(item.getKey())) || item.getKey() == key) {
                 return item;
             }
         }
@@ -31,7 +31,7 @@ public class StorageImpl<K, V> implements Storage<K, V> {
         Pair pair = this.findPair(key);
 
         if (pair != null) {
-            pair.value = value;
+            pair.setValue(value);
             return;
         }
 
@@ -47,7 +47,7 @@ public class StorageImpl<K, V> implements Storage<K, V> {
             return null;
         }
 
-        return (V) pair.value;
+        return (V) pair.getValue();
     }
 
     @Override
