@@ -18,7 +18,11 @@ public class StorageImpl<K, V> implements Storage<K, V> {
                 continue;
             }
 
-            if ((key != null && item != null && key.equals(item.getKey())) || item.getKey() == key) {
+            if ((key != null
+                    && item != null
+                    && key.equals(item.getKey())
+                )
+                    || item.getKey() == key) {
                 return item;
             }
         }
